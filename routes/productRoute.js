@@ -5,11 +5,11 @@ import { auth } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 //CREATE NEW PRODUCT ROUTE
-router.post('/', auth, async (request, response) => {
+router.post('/add', async (request, response) => {
     try {
         if (
             !request.body.name ||
-            !request.body.priceInCents ||
+            !request.body.price ||
             !request.body.image ||
             !request.body.category
         ) {
@@ -20,7 +20,7 @@ router.post('/', auth, async (request, response) => {
 
         const newProduct = {
             name: request.body.name,
-            priceInCents: request.body.priceInCents,
+            price: request.body.price,
             description: request.body.description,
             image: request.body.image,
             category: request.body.category
@@ -36,7 +36,7 @@ router.post('/', auth, async (request, response) => {
 });
 
 //GET ALL PRODUCTS ROUTE
-router.get('/', async (request, response) => {
+router.get('/list', async (request, response) => {
     try {
         const product = await Product.find({});
 
@@ -64,21 +64,31 @@ router.get('/:id', async (request, response) => {
 });
 
 //DELETE PRODUCT ROUTE
-router.delete('/:id', auth, async (request, response) => {
-    try {
-        const { id } = request.params;
+router.post('/remove', async (request, response) => {
+    // try {
+    //     const { id } = request.params;
         
-        const result = await Product.findByIdAndDelete(id);
+    //     const result = await Product.findByIdAndDelete(id);
 
-        if (!result) {
-            return response.status(404).json({ message: 'Product not found' });
-        }
+    //     if (!result) {
+    //         return response.status(404).json({ message: 'Product not found' });
+    //     }
 
-        response.status(200).json({ message: 'Product successfully deleted', deletedItem: result });
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({ message: error.message });
-    }
+    //     response.status(200).json({ message: 'Product successfully deleted', deletedItem: result });
+    // } catch (error) {
+    //     console.log(error.message);
+    //     response.status(500).send({ message: error.message });
+    // }
+    try {
+		const product = await productModel.findById(request.body.id);
+		// fs.unlink(`uploads/${product.image}`, ()=>{})
+
+		await productModel.findByIdAndDelete(request.body.id);
+		response.json({ success: true, message: 'Product Removed' });
+	} catch (error) {
+		console.log(error);
+		response.json({ success: false, message: 'Error' });
+	}
 });
 
 //UPDATE PRODUCT ROUTE
