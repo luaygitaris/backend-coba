@@ -64,7 +64,7 @@ router.get('/:id', async (request, response) => {
 });
 
 //DELETE PRODUCT ROUTE
-router.delete('/remove', async (request, response) => {
+router.post('/remove', async (request, response) => {
     // try {
     //     const { id } = request.params;
         
