@@ -1,3 +1,4 @@
+import "dotenv/config.js"
 import express from "express"
 import { config } from "dotenv"
 import mongoose from "mongoose"
@@ -72,3 +73,7 @@ app.use('/product', productRoute);
 app.use('/stripe', stripeRoute)
 app.use('/subscriber', subscriberRoute)
 app.use('/auth', authRouter);
+
+app.get('/', (req, res) => {
+    res.send('API Working');
+});
