@@ -12,6 +12,7 @@ import subscriberRoute from "./routes/subscriberRoute.js"
 import { authRouter } from "./controllers/authController.js";
 
 
+
 config();
 
 const app = express();
@@ -29,7 +30,7 @@ mongoose
 
 app.use(express.json());
 
-// app.use('/product', productRoute);
+
 
 // cloudinary.config({
 //     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -70,15 +71,16 @@ app.use(express.json());
 //     }
 // });
 
-// app.use('/stripe', stripeRoute)
-// app.use('/subscriber', subscriberRoute)
-// app.use('/auth', authRouter);
+app.use('/product', productRoute);
+app.use('/stripe', stripeRoute)
+app.use('/subscriber', subscriberRoute)
+app.use('/auth', authRouter);
 
 // Routes
-app.use('/api/product', productRouter);
-app.use('/api/user', userRouter);
-app.use('/api/cart', cartRouter);
-app.use('/api/order', orderRouter);
+// app.use('/api/product', productRouter);
+// app.use('/api/user', userRouter);
+// app.use('/api/cart', cartRouter);
+// app.use('/api/order', orderRouter);
 
 
 app.get('/', (req, res) => {
