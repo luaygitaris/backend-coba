@@ -71,7 +71,7 @@ app.use(express.json());
 //     }
 // });
 
-app.use('/product', productRoute);
+app.use('/api/product', productRoute);
 app.use('/stripe', stripeRoute)
 app.use('/subscriber', subscriberRoute)
 app.use('/auth', authRouter);
