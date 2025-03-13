@@ -73,8 +73,8 @@ app.use(express.json());
 
 app.use('/api/product', productRoute);
 app.use('/stripe', stripeRoute)
-app.use('/subscriber', subscriberRoute)
-app.use('/auth', authRouter);
+app.use('/api/subscriber', subscriberRoute)
+app.use('/api/user', authRouter);
 
 // Routes
 // app.use('/api/product', productRouter);
